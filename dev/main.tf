@@ -44,6 +44,7 @@ resource "random_pet" "website_bucket_name" {
   length = 4
 }
 
+# tflint-ignore: terraform_module_pinned_source
 module "frontend" {
   # tflint-ignore: terraform_module_pinned_source
 
