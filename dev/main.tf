@@ -44,10 +44,7 @@ resource "random_pet" "website_bucket_name" {
   length = 4
 }
 
-# tflint-ignore: all
 module "frontend" {
-  # tflint-ignore: all
-
   # source = "../../modules/frontend"
   source = "github.com/Rcomarceli/resume-modules//frontend"
 
