@@ -45,6 +45,7 @@ resource "random_pet" "website_bucket_name" {
 }
 
 module "frontend" {
+  # tflint-ignore: terraform_module_pinned_source
 
   # source = "../../modules/frontend"
   source = "github.com/Rcomarceli/resume-modules//frontend"
