@@ -8,10 +8,10 @@ terraform {
       source  = "hashicorp/random"
       version = "~> 3.1.0"
     }
-    # cloudflare = {
-    #   source  = "cloudflare/cloudflare"
-    #   version = "~> 3.0"
-    # }
+    archive = {
+      source  = "hashicorp/archive"
+      version = "~> 2.2.0"
+    }
   }
 
   required_version = ">= 1.2.0"
@@ -27,24 +27,28 @@ provider "aws" {
   }
 }
 
-# provider "cloudflare" {
-#   api_token = var.cloudflare_api_token
-# }
-
-# backend
 terraform {
 
   cloud {
     organization = "rcomarceli-tutorial"
 
     workspaces {
-      name = "dev-resume-sandbox"
+      name = "resume-backend-dev"
     }
   }
-
 }
 
+
 resource "random_pet" "website_bucket_name" {
-  prefix = "terraform-website"
+  prefix = var.bucket_name
   length = 4
+}
+
+module "frontend" {
+
+  source = "../../modules/frontend"
+
+  bucket_name = random_pet.website_bucket_name.id
+
+  environment = var.environment
 }
