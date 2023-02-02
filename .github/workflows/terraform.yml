@@ -43,7 +43,13 @@ jobs:
       - name: Setup TFLint
         uses: terraform-linters/setup-tflint@v3
         with:
-          tflint_version: v0.44.1
+          tflint_version: latest
+          # tflint_version: v0.44.1
+
+      - name: Load Tflint Config
+        uses: terraform-linters/tflint-load-config-action@v1
+        with:
+          source-repo: Rcomarceli/tflint-config
 
       - name: Show version
         run: tflint --version
