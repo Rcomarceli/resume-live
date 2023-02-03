@@ -59,10 +59,22 @@ resource "random_pet" "lambda_bucket_name" {
   length = 4
 }
 
+
+module "backend" {
+  source = "github.com/Rcomarceli/resume-modules//backend"
+
+  scope_permissions_arn       = var.scope_permissions_arn
+  update_visitor_counter_path = var.update_visitor_counter_path
+  lambda_bucket_name          = random_pet.lambda_bucket_name.id
+  database_name               = var.database_name
+  cloudflare_domain           = var.cloudflare_domain
+}
+
 module "frontend" {
   # source = "../../modules/frontend"
   source = "github.com/Rcomarceli/resume-modules//frontend"
 
+  api_url     = module.backend.api_url
   bucket_name = random_pet.website_bucket_name.id
   # environment = var.environment
 }
@@ -79,14 +91,4 @@ module "dns" {
   website_endpoint      = module.frontend.website_endpoint
   website_bucket_arn    = module.frontend.website_bucket_arn
   website_bucket_id     = module.frontend.website_bucket_id
-}
-
-module "backend" {
-  source = "github.com/Rcomarceli/resume-modules//backend"
-
-  scope_permissions_arn       = var.scope_permissions_arn
-  update_visitor_counter_path = var.update_visitor_counter_path
-  lambda_bucket_name          = random_pet.lambda_bucket_name.id
-  database_name               = var.database_name
-  cloudflare_domain           = var.cloudflare_domain
 }
