@@ -63,12 +63,12 @@ module "dns" {
   source = "github.com/Rcomarceli/resume-modules//dns"
 
   # all defined in the terraform cloud org as environment variables
-  cloudflare_zone_id = var.cloudflare_zone_id
-  cloudflare_domain = var.cloudflare_domain
-  cloudflare_api_token = var.cloudflare_api_token
+  cloudflare_zone_id    = var.cloudflare_zone_id
+  cloudflare_domain     = var.cloudflare_domain
+  cloudflare_api_token  = var.cloudflare_api_token
   cloudflare_account_id = var.cloudflare_account_id
-  website_endpoint = module.frontend.website_endpoint
-  website_bucket_arn = module.frontend.website_bucket_arn
-  website_bucket_id = module.frontend.website_bucket_id
+  website_endpoint      = module.frontend.website_endpoint
+  website_bucket_arn    = module.frontend.website_bucket_arn
+  website_bucket_id     = module.frontend.website_bucket_id
 }
 
