@@ -88,4 +88,5 @@ module "backend" {
   update_visitor_counter_path = var.update_visitor_counter_path
   lambda_bucket_name          = random_pet.lambda_bucket_name.id
   database_name               = var.database_name
+  cloudflare_domain           = var.cloudflare_domain
 }
