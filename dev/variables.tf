@@ -106,6 +106,6 @@ variable "api_gateway_stage_name" {
 
 variable "lambda_permission_name" {
   description = "Name for lambda permission"
-  name        = "lambda_permission"
+  default     = "lambda_permission"
   type        = string
 }
