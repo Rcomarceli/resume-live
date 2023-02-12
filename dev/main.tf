@@ -80,8 +80,8 @@ module "frontend" {
   # source = "../../modules/frontend"
   source = "github.com/Rcomarceli/resume-modules//frontend"
 
-  api_url     = module.backend.api_url
-  bucket_name = random_pet.website_bucket_name.id
+  api_url             = module.backend.api_url
+  website_bucket_name = random_pet.website_bucket_name.id
   # environment = var.environment
 }
 
