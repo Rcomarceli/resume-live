@@ -73,3 +73,39 @@ variable "database_name" {
   default     = "resume_db"
   type        = string
 }
+
+variable "function_name" {
+  description = "Lambda Function Name"
+  default     = "updatevisitorcounter"
+  type        = string
+}
+
+variable "lambda_iam_role_name" {
+  description = "Name for Lambda IAM Role. Used for permissions for the lambda function"
+  default     = "Lambda_iam_role"
+  type        = string
+}
+
+variable "lambda_iam_policy_name" {
+  description = "Name for Lambda IAM Policy. Attached to Lambda Role"
+  default     = "Lambda_Iam_Policy"
+  type        = string
+}
+
+variable "api_gateway_name" {
+  description = "Name for API Gateway"
+  default     = "resume_api"
+  type        = string
+}
+
+variable "api_gateway_stage_name" {
+  description = "Name for API Gateway Stage"
+  default     = "v1"
+  type        = string
+}
+
+variable "lambda_permission_name" {
+  description = "Name for lambda permission"
+  name        = "lambda_permission"
+  type        = string
+}
