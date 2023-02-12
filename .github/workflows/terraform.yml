@@ -111,3 +111,9 @@ jobs:
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
+
+      - name: Run End to End Test
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          spec: cypress/e2e/spec.cy.js
