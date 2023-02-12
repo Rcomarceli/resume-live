@@ -95,6 +95,4 @@ module "dns" {
   # cloudflare_api_token  = var.cloudflare_api_token
   cloudflare_account_id = var.cloudflare_account_id
   website_endpoint      = module.frontend.website_endpoint
-  website_bucket_arn    = module.frontend.website_bucket_arn
-  website_bucket_id     = module.frontend.website_bucket_id
 }
