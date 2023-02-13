@@ -49,13 +49,14 @@ terraform {
 }
 
 
+# bucket names have a dash instead since an underscore is invalid
 resource "random_pet" "website_bucket_name" {
-  prefix = "${var.environment}_${var.website_bucket_name}"
+  prefix = "${var.environment}-${var.website_bucket_name}"
   length = 3
 }
 
 resource "random_pet" "lambda_bucket_name" {
-  prefix = "${var.environment}_${var.lambda_bucket_name}"
+  prefix = "${var.environment}-${var.lambda_bucket_name}"
   length = 3
 }
 
