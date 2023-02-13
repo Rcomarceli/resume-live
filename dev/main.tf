@@ -62,7 +62,7 @@ resource "random_pet" "lambda_bucket_name" {
 
 
 module "backend" {
-  source = "github.com/Rcomarceli/resume-modules//backend"
+  source = "github.com/Rcomarceli/resume-modules//backend?v1.0.0"
 
   scope_permissions_arn       = var.scope_permissions_arn
   update_visitor_counter_path = var.update_visitor_counter_path
@@ -80,14 +80,14 @@ module "backend" {
 
 module "frontend" {
   # source = "../../modules/frontend"
-  source = "github.com/Rcomarceli/resume-modules//frontend"
+  source = "github.com/Rcomarceli/resume-modules//frontend?v1.0.0"
 
   api_url             = module.backend.api_url
   website_bucket_name = random_pet.website_bucket_name.id
 }
 
 module "dns" {
-  source = "github.com/Rcomarceli/resume-modules//dns"
+  source = "github.com/Rcomarceli/resume-modules//dns?v1.0.0"
 
   # all defined in the terraform cloud org as environment variables
   environment        = var.environment
