@@ -13,7 +13,6 @@ variable "cloudflare_zone_id" {
 
 variable "cloudflare_domain" {
   description = "Domain name to be used for accessing the website"
-  default     = "dev.rcmarceli.com"
   type        = string
 }
 

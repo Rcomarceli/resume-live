@@ -43,7 +43,7 @@ terraform {
     organization = "rcomarceli-tutorial"
 
     workspaces {
-      name = "resume-backend-dev"
+      name = "dev-resume"
     }
   }
 }
@@ -69,7 +69,7 @@ module "backend" {
   lambda_bucket_name          = random_pet.lambda_bucket_name.id
   database_name               = "${var.environment}_${var.database_name}"
   # cloudflare_domain           = "dev.rcmarceli.com"
-  cloudflare_domain      = var.cloudflare_domain
+  # cloudflare_domain      = var.cloudflare_domain
   function_name          = "${var.environment}_${var.function_name}"
   lambda_iam_role_name   = "${var.environment}_${var.lambda_iam_role_name}"
   lambda_iam_policy_name = "${var.environment}_${var.lambda_iam_policy_name}"
@@ -94,7 +94,7 @@ module "dns" {
   environment        = var.environment
   cloudflare_zone_id = var.cloudflare_zone_id
   # cloudflare_domain  = "dev.rcmarceli.com"
-  cloudflare_domain     = var.cloudflare_domain
+  # cloudflare_domain     = var.cloudflare_domain
   cloudflare_account_id = var.cloudflare_account_id
   website_endpoint      = module.frontend.website_endpoint
 }
