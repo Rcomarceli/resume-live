@@ -3,7 +3,6 @@ describe('The Home Page', () => {
     
       
       cy.visit(Cypress.env('TARGET_DOMAIN')); // change URL to match your dev URL
-      // cy.visit('http://rcmarceli.com'); // change URL to match your dev URL
 
 
 

@@ -6,3 +6,7 @@ node_modules/
 ignore/
 *.zip
 *.backup
+
+cypress/support/
+cypress/videos/
+cypress/screenshots/
