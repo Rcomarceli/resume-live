@@ -84,7 +84,6 @@ module "frontend" {
 
   api_url             = module.backend.api_url
   website_bucket_name = random_pet.website_bucket_name.id
-  # environment = var.environment
 }
 
 module "dns" {
