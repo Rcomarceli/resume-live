@@ -67,13 +67,14 @@ module "backend" {
   update_visitor_counter_path = var.update_visitor_counter_path
   lambda_bucket_name          = random_pet.lambda_bucket_name.id
   database_name               = var.database_name
-  cloudflare_domain           = var.cloudflare_domain
-  function_name               = var.function_name
-  lambda_iam_role_name        = var.lambda_iam_role_name
-  lambda_iam_policy_name      = var.lambda_iam_policy_name
-  api_gateway_name            = var.api_gateway_name
-  api_gateway_stage_name      = var.api_gateway_stage_name
-  lambda_permission_name      = var.lambda_permission_name
+  cloudflare_domain           = "dev.rcmarceli.com"
+  # cloudflare_domain           = var.cloudflare_domain
+  function_name          = var.function_name
+  lambda_iam_role_name   = var.lambda_iam_role_name
+  lambda_iam_policy_name = var.lambda_iam_policy_name
+  api_gateway_name       = var.api_gateway_name
+  api_gateway_stage_name = var.api_gateway_stage_name
+  lambda_permission_name = var.lambda_permission_name
 }
 
 module "frontend" {
@@ -91,8 +92,8 @@ module "dns" {
   # all defined in the terraform cloud org as environment variables
   environment        = var.environment
   cloudflare_zone_id = var.cloudflare_zone_id
-  cloudflare_domain  = var.cloudflare_domain
-  # cloudflare_api_token  = var.cloudflare_api_token
+  cloudflare_domain  = "dev.rcmarceli.com"
+  # cloudflare_domain  = var.cloudflare_domain
   cloudflare_account_id = var.cloudflare_account_id
   website_endpoint      = module.frontend.website_endpoint
 }

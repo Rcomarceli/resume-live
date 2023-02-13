@@ -2,7 +2,8 @@ describe('The Home Page', () => {
   it('increments the visitor counter', () => {
     
       
-      cy.visit('http://rcmarceli.com'); // change URL to match your dev URL
+      cy.visit(Cypress.env('TARGET_DOMAIN')); // change URL to match your dev URL
+      // cy.visit('http://rcmarceli.com'); // change URL to match your dev URL
 
 
 
