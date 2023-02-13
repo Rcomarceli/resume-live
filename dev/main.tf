@@ -50,13 +50,13 @@ terraform {
 
 
 resource "random_pet" "website_bucket_name" {
-  prefix = var.website_bucket_name
-  length = 4
+  prefix = "${var.environment}_${var.website_bucket_name}"
+  length = 3
 }
 
 resource "random_pet" "lambda_bucket_name" {
-  prefix = var.lambda_bucket_name
-  length = 4
+  prefix = "${var.environment}_${var.lambda_bucket_name}"
+  length = 3
 }
 
 
@@ -66,15 +66,15 @@ module "backend" {
   scope_permissions_arn       = var.scope_permissions_arn
   update_visitor_counter_path = var.update_visitor_counter_path
   lambda_bucket_name          = random_pet.lambda_bucket_name.id
-  database_name               = var.database_name
-  cloudflare_domain           = "dev.rcmarceli.com"
-  # cloudflare_domain           = var.cloudflare_domain
-  function_name          = var.function_name
-  lambda_iam_role_name   = var.lambda_iam_role_name
-  lambda_iam_policy_name = var.lambda_iam_policy_name
-  api_gateway_name       = var.api_gateway_name
-  api_gateway_stage_name = var.api_gateway_stage_name
-  lambda_permission_name = var.lambda_permission_name
+  database_name               = "${var.environment}_${var.database_name}"
+  # cloudflare_domain           = "dev.rcmarceli.com"
+  cloudflare_domain      = var.cloudflare_domain
+  function_name          = "${var.environment}_${var.function_name}"
+  lambda_iam_role_name   = "${var.environment}_${var.lambda_iam_role_name}"
+  lambda_iam_policy_name = "${var.environment}_${var.lambda_iam_policy_name}"
+  api_gateway_name       = "${var.environment}_${var.api_gateway_name}"
+  api_gateway_stage_name = "${var.environment}_${var.api_gateway_stage_name}"
+  lambda_permission_name = "${var.environment}_${var.lambda_permission_name}"
 }
 
 module "frontend" {
@@ -92,8 +92,8 @@ module "dns" {
   # all defined in the terraform cloud org as environment variables
   environment        = var.environment
   cloudflare_zone_id = var.cloudflare_zone_id
-  cloudflare_domain  = "dev.rcmarceli.com"
-  # cloudflare_domain  = var.cloudflare_domain
+  # cloudflare_domain  = "dev.rcmarceli.com"
+  cloudflare_domain     = var.cloudflare_domain
   cloudflare_account_id = var.cloudflare_account_id
   website_endpoint      = module.frontend.website_endpoint
 }
