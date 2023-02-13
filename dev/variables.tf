@@ -82,13 +82,13 @@ variable "function_name" {
 
 variable "lambda_iam_role_name" {
   description = "Name for Lambda IAM Role. Used for permissions for the lambda function"
-  default     = "Lambda_iam_role"
+  default     = "resume_lambda_iam_role"
   type        = string
 }
 
 variable "lambda_iam_policy_name" {
   description = "Name for Lambda IAM Policy. Attached to Lambda Role"
-  default     = "Lambda_Iam_Policy"
+  default     = "resume_lambda_Iam_Policy"
   type        = string
 }
 
@@ -106,6 +106,6 @@ variable "api_gateway_stage_name" {
 
 variable "lambda_permission_name" {
   description = "Name for lambda permission"
-  default     = "lambda_permission"
+  default     = "resume_lambda_permission"
   type        = string
 }
