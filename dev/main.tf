@@ -79,7 +79,6 @@ module "backend" {
 }
 
 module "frontend" {
-  # source = "../../modules/frontend"
   source = "github.com/Rcomarceli/resume-modules//frontend?ref=v1.0.0"
 
   api_url             = module.backend.api_url
