@@ -231,4 +231,4 @@ jobs:
           browser: chrome
           spec: cypress/e2e/prod_spec.cy.js
         env:
-          CYPRESS_DEV_DOMAIN: ${{ vars.CYPRESS_PROD_DOMAIN }}
+          CYPRESS_PROD_DOMAIN: ${{ vars.CYPRESS_PROD_DOMAIN }}
