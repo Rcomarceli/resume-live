@@ -68,7 +68,6 @@ module "backend" {
   update_visitor_counter_path = var.update_visitor_counter_path
   lambda_bucket_name          = random_pet.lambda_bucket_name.id
   database_name               = "${var.environment}_${var.database_name}"
-  # cloudflare_domain           = "dev.rcmarceli.com"
   cloudflare_domain      = var.cloudflare_domain
   function_name          = "${var.environment}_${var.function_name}"
   lambda_iam_role_name   = "${var.environment}_${var.lambda_iam_role_name}"
@@ -79,7 +78,6 @@ module "backend" {
 }
 
 module "frontend" {
-  # source = "../../modules/frontend"
   source = "github.com/Rcomarceli/resume-modules//frontend?ref=v1.0.0"
 
   api_url             = module.backend.api_url
@@ -89,10 +87,10 @@ module "frontend" {
 module "dns" {
   source = "github.com/Rcomarceli/resume-modules//dns?ref=v1.0.0"
 
-  # all defined in the terraform cloud org as environment variables
+  # cloudflare variables here are defined in the terraform cloud org 
+  # as environment variables
   environment        = var.environment
   cloudflare_zone_id = var.cloudflare_zone_id
-  # cloudflare_domain  = "dev.rcmarceli.com"
   cloudflare_domain     = var.cloudflare_domain
   cloudflare_account_id = var.cloudflare_account_id
   website_endpoint      = module.frontend.website_endpoint

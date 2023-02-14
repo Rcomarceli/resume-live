@@ -9,9 +9,6 @@ on:
 jobs:
   dev_terraform:
     permissions: write-all
-    # name: print-token
-    # environment: dev
-    # needs: pre-pkr
     name: "Terraform Dev Environment"
     runs-on: ubuntu-latest
     defaults:
@@ -26,7 +23,6 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          # terraform_version: 0.13.0:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: Configure AWS Credentials
@@ -46,7 +42,6 @@ jobs:
         uses: terraform-linters/setup-tflint@v3
         with:
           tflint_version: latest
-          # tflint_version: v0.44.1
 
       - name: Load Tflint Config
         uses: terraform-linters/tflint-load-config-action@v1
@@ -122,9 +117,6 @@ jobs:
 
   prod_terraform:
     permissions: write-all
-    # name: print-token
-    # environment: dev
-    # needs: pre-pkr
     name: "Terraform Prod Environment"
     runs-on: ubuntu-latest
     defaults:
@@ -139,7 +131,6 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          # terraform_version: 0.13.0:
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: Configure AWS Credentials
@@ -159,7 +150,6 @@ jobs:
         uses: terraform-linters/setup-tflint@v3
         with:
           tflint_version: latest
-          # tflint_version: v0.44.1
 
       - name: Load Tflint Config
         uses: terraform-linters/tflint-load-config-action@v1
