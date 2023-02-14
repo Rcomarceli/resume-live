@@ -97,3 +97,5 @@ module "dns" {
   cloudflare_account_id = var.cloudflare_account_id
   website_endpoint      = module.frontend.website_endpoint
 }
+
+# note that module www is not used here, because we are using the dev subdomain
