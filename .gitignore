@@ -10,3 +10,5 @@ ignore/
 cypress/support/
 cypress/videos/
 cypress/screenshots/
+cypress/fixtures/
+cypress/downloads/
