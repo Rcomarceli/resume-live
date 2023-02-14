@@ -3,7 +3,7 @@ describe('Checking Prod website backend', () => {
       
 
     //   tests www to non www redirect as well
-      cy.visit(`www.${Cypress.env('PROD_DOMAIN')}`); // change URL to match your dev URL
+      cy.visit(`www.${Cypress.env('PROD_DOMAIN')}`); 
 
 
 

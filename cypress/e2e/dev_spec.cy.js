@@ -2,7 +2,7 @@ describe('Checking Dev website backend', () => {
   it('increments the visitor counter', () => {
     
       
-      cy.visit(Cypress.env('DEV_DOMAIN')); // change URL to match your dev URL
+      cy.visit(Cypress.env('DEV_DOMAIN')); 
 
 
 

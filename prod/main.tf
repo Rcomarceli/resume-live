@@ -68,13 +68,13 @@ module "backend" {
   update_visitor_counter_path = var.update_visitor_counter_path
   lambda_bucket_name          = random_pet.lambda_bucket_name.id
   database_name               = "${var.environment}_${var.database_name}"
-  cloudflare_domain      = var.cloudflare_domain
-  function_name          = "${var.environment}_${var.function_name}"
-  lambda_iam_role_name   = "${var.environment}_${var.lambda_iam_role_name}"
-  lambda_iam_policy_name = "${var.environment}_${var.lambda_iam_policy_name}"
-  api_gateway_name       = "${var.environment}_${var.api_gateway_name}"
-  api_gateway_stage_name = "${var.environment}_${var.api_gateway_stage_name}"
-  lambda_permission_name = "${var.environment}_${var.lambda_permission_name}"
+  cloudflare_domain           = var.cloudflare_domain
+  function_name               = "${var.environment}_${var.function_name}"
+  lambda_iam_role_name        = "${var.environment}_${var.lambda_iam_role_name}"
+  lambda_iam_policy_name      = "${var.environment}_${var.lambda_iam_policy_name}"
+  api_gateway_name            = "${var.environment}_${var.api_gateway_name}"
+  api_gateway_stage_name      = "${var.environment}_${var.api_gateway_stage_name}"
+  lambda_permission_name      = "${var.environment}_${var.lambda_permission_name}"
 }
 
 module "frontend" {
@@ -89,8 +89,8 @@ module "dns" {
 
   # cloudflare variables here are defined in the terraform cloud org 
   # as environment variables
-  environment        = var.environment
-  cloudflare_zone_id = var.cloudflare_zone_id
+  environment           = var.environment
+  cloudflare_zone_id    = var.cloudflare_zone_id
   cloudflare_domain     = var.cloudflare_domain
   cloudflare_account_id = var.cloudflare_account_id
   website_endpoint      = module.frontend.website_endpoint
