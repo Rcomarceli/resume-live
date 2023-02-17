@@ -162,8 +162,6 @@ jobs:
 
       - name: Init TFLint
         run: tflint --init
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run TFLint
         run: tflint -f compact
