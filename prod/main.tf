@@ -120,7 +120,7 @@ resource "cloudflare_ruleset" "ratelimit" {
       requests_per_period = 5
       mitigation_timeout  = 10
     }
-    expression = "(http.request.uri.path eq \"/\")"
+    expression  = "(http.request.uri.path eq \"/\")"
     description = "Ratelimits for homepage"
     enabled     = true
   }
