@@ -104,6 +104,7 @@ module "www" {
 }
 
 # testing out rate limiting rule configured here. it is not included as a module because this project was intended as free tier only. 
+# this requires zone, zone waf edit permissions.
 resource "cloudflare_rate_limit" "example" {
   zone_id   = var.cloudflare_zone_id
   threshold = 10
