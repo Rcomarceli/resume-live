@@ -104,11 +104,11 @@ module "www" {
 }
 
 # testing out rate limiting rule configured here. it is not included as a module because this project was intended as free tier only. 
-# this requires zone, zone waf edit permissions.
+# this requires zone, zone waf edit permissions and firewall services edit permissions
 resource "cloudflare_rate_limit" "security" {
   zone_id   = var.cloudflare_zone_id
-  threshold = 10
-  period    = 5
+  threshold = 5
+  period    = 10
   # match {
   #   request {
   #     url_pattern = "${var.cloudflare_zone}/"
