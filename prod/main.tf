@@ -138,7 +138,7 @@ resource "cloudflare_ruleset" "ratelimit" {
       requests_per_period = 5
       mitigation_timeout  = 60
     }
-    expression = "(http.request.uri.path matches \"/\")"
+    expression = "(http.request.uri.path eq \"/\")"
     # expression = "(http.request.uri.path matches \"^/api/\")"
     description = "My rate limiting rule"
     enabled     = true
