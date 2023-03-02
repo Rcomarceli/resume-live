@@ -120,5 +120,5 @@ resource "cloudflare_rate_limit" "example" {
   correlate {
     by = "nat"
   }
-  description         = "example rate limit for a zone"
+  description = "example rate limit for a zone"
 }
