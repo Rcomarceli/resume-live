@@ -109,13 +109,13 @@ resource "cloudflare_rate_limit" "security" {
   zone_id   = var.cloudflare_zone_id
   threshold = 5
   period    = 10
-  # match {
-  #   request {
-  #     url_pattern = "${var.cloudflare_zone}/"
-  #     schemes     = ["HTTP", "HTTPS"]
-  #     methods     = ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"]
-  #   }
-  # }
+  match {
+    request {
+      url_pattern = "${var.cloudflare_zone}/"
+      schemes     = ["HTTP", "HTTPS"]
+      methods     = ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"]
+    }
+  }
   action {
     mode    = "ban"
     timeout = 10
