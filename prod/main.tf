@@ -111,7 +111,7 @@ resource "cloudflare_rate_limit" "security" {
   period    = 10
   match {
     request {
-      url_pattern = "${var.cloudflare_zone}/"
+      url_pattern = "${var.cloudflare_domain}/"
       schemes     = ["HTTP", "HTTPS"]
       methods     = ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"]
     }
