@@ -105,20 +105,42 @@ module "www" {
 
 # testing out rate limiting rule configured here. it is not included as a module because this project was intended as free tier only. 
 # this requires zone, zone waf edit permissions and firewall services edit permissions
-resource "cloudflare_rate_limit" "security" {
-  zone_id   = var.cloudflare_zone_id
-  threshold = 5
-  period    = 10
-  match {
-    request {
-      url_pattern = "${var.cloudflare_domain}/"
-      schemes     = ["HTTP", "HTTPS"]
-      methods     = ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"]
-    }
-  }
-  action {
-    mode    = "ban"
-    timeout = 10
-  }
+# resource "cloudflare_rate_limit" "security" {
+#   zone_id   = var.cloudflare_zone_id
+#   threshold = 5
+#   period    = 10
+#   match {
+#     request {
+#       url_pattern = "${var.cloudflare_domain}/"
+#       schemes     = ["HTTP", "HTTPS"]
+#       methods     = ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"]
+#     }
+#   }
+#   action {
+#     mode    = "ban"
+#     timeout = 10
+#   }
+#   description = "example rate limit for a zone"
+# }
+
+resource "cloudflare_ruleset" "ratelimit" {
+  zone_id     = var.cloudflare_zone_id
+  name        = "Rate limiting for my zone"
   description = "example rate limit for a zone"
+  kind        = "zone"
+  phase       = "http_ratelimit"
+
+  rules {
+    action = "block"
+    ratelimit {
+      characteristics     = ["cf.colo.id", "ip.src"]
+      period              = 10
+      requests_per_period = 5
+      mitigation_timeout  = 60
+    }
+    expression = "(http.request.uri.path matches \"/\")"
+    # expression = "(http.request.uri.path matches \"^/api/\")"
+    description = "My rate limiting rule"
+    enabled     = true
+  }
 }
