@@ -96,3 +96,29 @@ module "dns" {
 }
 
 # note that module www is not used here, because we are using the dev subdomain
+
+# testing out rate limiting rule configured here. it is not included as a module because this project was intended as free tier only. 
+resource "cloudflare_rate_limit" "example" {
+  zone_id   = var.cloudflare_zone_id
+  threshold = 10
+  period    = 5
+  # match {
+  #   request {
+  #     url_pattern = "${var.cloudflare_zone}/"
+  #     schemes     = ["HTTP", "HTTPS"]
+  #     methods     = ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"]
+  #   }
+  # }
+  action {
+    mode    = "simulate"
+    timeout = 10
+    response {
+      content_type = "text/plain"
+      body         = "custom response body"
+    }
+  }
+  correlate {
+    by = "nat"
+  }
+  description         = "example rate limit for a zone"
+}
