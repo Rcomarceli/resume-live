@@ -136,7 +136,7 @@ resource "cloudflare_ruleset" "ratelimit" {
       characteristics     = ["cf.colo.id", "ip.src"]
       period              = 10
       requests_per_period = 5
-      mitigation_timeout  = 60
+      mitigation_timeout  = 10
     }
     expression = "(http.request.uri.path eq \"/\")"
     # expression = "(http.request.uri.path matches \"^/api/\")"
