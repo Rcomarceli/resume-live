@@ -103,30 +103,12 @@ module "www" {
   cloudflare_domain  = var.cloudflare_domain
 }
 
-# testing out rate limiting rule configured here. it is not included as a module because this project was intended as free tier only. 
-# this requires zone, zone waf edit permissions and firewall services edit permissions
-# resource "cloudflare_rate_limit" "security" {
-#   zone_id   = var.cloudflare_zone_id
-#   threshold = 5
-#   period    = 10
-#   match {
-#     request {
-#       url_pattern = "${var.cloudflare_domain}/"
-#       schemes     = ["HTTP", "HTTPS"]
-#       methods     = ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"]
-#     }
-#   }
-#   action {
-#     mode    = "ban"
-#     timeout = 10
-#   }
-#   description = "example rate limit for a zone"
-# }
-
+# zone settings. not included in modules since we want only one rule for the entire zone
+# in order to keep cloudflare on free tier
 resource "cloudflare_ruleset" "ratelimit" {
   zone_id     = var.cloudflare_zone_id
-  name        = "Rate limiting for my zone"
-  description = "example rate limit for a zone"
+  name        = "Ratelimits for homepage"
+  description = "Ratelimits for homepage"
   kind        = "zone"
   phase       = "http_ratelimit"
 
@@ -139,8 +121,7 @@ resource "cloudflare_ruleset" "ratelimit" {
       mitigation_timeout  = 10
     }
     expression = "(http.request.uri.path eq \"/\")"
-    # expression = "(http.request.uri.path matches \"^/api/\")"
-    description = "My rate limiting rule"
+    description = "Ratelimits for homepage"
     enabled     = true
   }
 }
