@@ -67,16 +67,17 @@ jobs:
         id: fmt
         run: terraform fmt -check
 
+        # github.workspace used here since this bugs out if i use "./dev/..."
       - name: Download Website Dependencies
-        working-directory: ./dev/.terraform/modules/frontend/frontend/src
+        working-directory: ${{ github.workspace }}/dev/.terraform/modules/frontend/frontend/src
         run: npm ci
 
       - name: Create Env file 
-        working-directory: ./dev/.terraform/modules/frontend/frontend/src
+        working-directory: ${{ github.workspace }}/dev/.terraform/modules/frontend/frontend/src
         run: echo "VITE_DOMAIN_NAME=${{ vars.DEV_DOMAIN }}" > .env
 
       - name: Build Website
-        working-directory: ./dev/.terraform/modules/frontend/frontend/src
+        working-directory: ${{ github.workspace }}/dev/.terraform/modules/frontend/frontend/src
         run: npm run build
 
       - name: Terraform Init
