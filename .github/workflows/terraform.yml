@@ -20,6 +20,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install Node and NPM
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
@@ -65,6 +70,18 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
+      
+      - name: Download Website Dependencies
+        working-directory: ./dev/.terraform/modules/frontend/frontend/src
+        run: npm ci
+
+      - name: Create Env file 
+        working-directory: ./dev/.terraform/modules/frontend/frontend/src
+        run: echo "VITE_DOMAIN_NAME=${{ vars.DEV_DOMAIN }}" > .env
+
+      - name: Build Website
+        working-directory: ./dev/.terraform/modules/frontend/frontend/src
+        run: npm run build
       
       - name: Terraform Validate
         id: validate
@@ -113,7 +130,7 @@ jobs:
           browser: chrome
           spec: cypress/e2e/dev_spec.cy.js
         env:
-          CYPRESS_DEV_DOMAIN: ${{ vars.CYPRESS_DEV_DOMAIN }}
+          CYPRESS_DEV_DOMAIN: ${{ vars.DEV_DOMAIN }}
 
   prod_terraform:
     permissions: write-all
@@ -127,6 +144,11 @@ jobs:
         uses: actions/checkout@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Node and NPM
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
@@ -221,4 +243,4 @@ jobs:
           browser: chrome
           spec: cypress/e2e/prod_spec.cy.js
         env:
-          CYPRESS_PROD_DOMAIN: ${{ vars.CYPRESS_PROD_DOMAIN }}
+          CYPRESS_PROD_DOMAIN: ${{ vars.PROD_DOMAIN }}
