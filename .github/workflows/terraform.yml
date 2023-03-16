@@ -67,6 +67,18 @@ jobs:
         id: fmt
         run: terraform fmt -check
 
+      - name: Download Website Dependencies
+        working-directory: ./dev/.terraform.modules/frontend/frontend/src
+        run: npm ci
+
+      - name: Create Env file 
+        working-directory: ./dev/.terraform.modules/frontend/frontend/src
+        run: echo "VITE_DOMAIN_NAME=insertdomainnamehere.local" > .env
+
+      - name: Build Website
+        working-directory: ./dev/.terraform.modules/frontend/frontend/src
+        run: npm run build
+
       - name: Terraform Init
         id: init
         run: terraform init
