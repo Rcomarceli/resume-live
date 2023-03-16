@@ -68,15 +68,15 @@ jobs:
         run: terraform fmt -check
 
       - name: Download Website Dependencies
-        working-directory: ./dev/.terraform.modules/frontend/frontend/src
+        working-directory: ./dev/.terraform/modules/frontend/frontend/src
         run: npm ci
 
       - name: Create Env file 
-        working-directory: ./dev/.terraform.modules/frontend/frontend/src
-        run: echo "VITE_DOMAIN_NAME=insertdomainnamehere.local" > .env
+        working-directory: ./dev/.terraform/modules/frontend/frontend/src
+        run: echo "VITE_DOMAIN_NAME=${{ vars.DEV_DOMAIN }}" > .env
 
       - name: Build Website
-        working-directory: ./dev/.terraform.modules/frontend/frontend/src
+        working-directory: ./dev/.terraform/modules/frontend/frontend/src
         run: npm run build
 
       - name: Terraform Init
@@ -130,7 +130,7 @@ jobs:
           browser: chrome
           spec: cypress/e2e/dev_spec.cy.js
         env:
-          CYPRESS_DEV_DOMAIN: ${{ vars.CYPRESS_DEV_DOMAIN }}
+          CYPRESS_DEV_DOMAIN: ${{ vars.DEV_DOMAIN }}
 
   prod_terraform:
     permissions: write-all
@@ -243,4 +243,4 @@ jobs:
           browser: chrome
           spec: cypress/e2e/prod_spec.cy.js
         env:
-          CYPRESS_PROD_DOMAIN: ${{ vars.CYPRESS_PROD_DOMAIN }}
+          CYPRESS_PROD_DOMAIN: ${{ vars.PROD_DOMAIN }}
