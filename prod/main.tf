@@ -62,7 +62,7 @@ resource "random_pet" "lambda_bucket_name" {
 
 
 module "backend" {
-  source = "github.com/Rcomarceli/resume-modules//backend?ref=v2.1.5"
+  source = "github.com/Rcomarceli/resume-modules//backend?ref=v2.1.6"
 
   environment                 = var.environment
   scope_permissions_arn       = var.scope_permissions_arn
@@ -81,14 +81,14 @@ module "backend" {
 }
 
 module "frontend" {
-  source = "github.com/Rcomarceli/resume-modules//frontend?ref=v2.1.5"
+  source = "github.com/Rcomarceli/resume-modules//frontend?ref=v2.1.6"
 
   api_url             = module.backend.api_url
   website_bucket_name = random_pet.website_bucket_name.id
 }
 
 module "dns" {
-  source = "github.com/Rcomarceli/resume-modules//dns?ref=v2.1.5"
+  source = "github.com/Rcomarceli/resume-modules//dns?ref=v2.1.6"
 
   # cloudflare variables here are defined in the terraform cloud org 
   # as environment variables
@@ -100,7 +100,7 @@ module "dns" {
 }
 
 module "www" {
-  source = "github.com/Rcomarceli/resume-modules//www?ref=v2.1.5"
+  source = "github.com/Rcomarceli/resume-modules//www?ref=v2.1.6"
 
   cloudflare_zone_id = var.cloudflare_zone_id
   cloudflare_domain  = var.cloudflare_domain
