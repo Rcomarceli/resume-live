@@ -117,6 +117,7 @@ jobs:
         run: terraform apply -auto-approve -input=false
 
       - name: Run End to End Test
+        if: github.event_name == 'push'
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
@@ -234,6 +235,7 @@ jobs:
         run: terraform apply -auto-approve -input=false
 
       - name: Run End to End Test
+        if: github.event_name == 'push'
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
