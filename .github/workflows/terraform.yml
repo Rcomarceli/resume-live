@@ -113,7 +113,7 @@ jobs:
           browser: chrome
           spec: cypress/e2e/dev_spec.cy.js
         env:
-          CYPRESS_DEV_DOMAIN: ${{ vars.CYPRESS_DEV_DOMAIN }}
+          CYPRESS_DEV_DOMAIN: ${{ vars.DEV_DOMAIN }}
 
   prod_terraform:
     permissions: write-all
@@ -221,4 +221,4 @@ jobs:
           browser: chrome
           spec: cypress/e2e/prod_spec.cy.js
         env:
-          CYPRESS_PROD_DOMAIN: ${{ vars.CYPRESS_PROD_DOMAIN }}
+          CYPRESS_PROD_DOMAIN: ${{ vars.PROD_DOMAIN }}
