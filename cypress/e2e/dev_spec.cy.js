@@ -1,6 +1,7 @@
 describe('E2E testing', () => {
 
-  const domain = Cypress.env('DEV_DOMAIN')
+  const domain = `https://${Cypress.env('DEV_DOMAIN')}`
+  const api_path = 'api'
 
   beforeEach(() => {
 
@@ -12,13 +13,9 @@ describe('E2E testing', () => {
     
     cy.visit(domain); 
 
-
     cy.get('[data-cy="visitorCount"]').contains(/\d+/).then(($count) =>{
-        const count1 = parseInt($count.text());
-        console.log(count1);
-        cy.window().its('API_URL').then(url => {
-            cy.request('POST', url).its('body').then(text => parseInt(text)).should('be.gt', count1);
-        })
+      const count1 = parseInt($count.text());
+      cy.request('POST', domain + "/" + api_path ).its('body').then(text => parseInt(text)).should('be.gt', count1);
 
     });
   })
