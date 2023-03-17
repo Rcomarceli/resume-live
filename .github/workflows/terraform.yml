@@ -189,7 +189,7 @@ jobs:
         run: terraform init
 
       - name: Download Website Dependencies and Build
-        working-directory: ./dev/.terraform/modules/frontend/frontend/src
+        working-directory: ./prod/.terraform/modules/frontend/frontend/src
         run: npm ci && npm run build
       
       - name: Terraform Validate
