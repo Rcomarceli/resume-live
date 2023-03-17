@@ -64,6 +64,7 @@ resource "random_pet" "lambda_bucket_name" {
 module "backend" {
   source = "github.com/Rcomarceli/resume-modules//backend?ref=v2.1.1"
 
+  environment                 = var.environment
   scope_permissions_arn       = var.scope_permissions_arn
   update_visitor_counter_path = var.update_visitor_counter_path
   lambda_bucket_name          = random_pet.lambda_bucket_name.id
@@ -75,6 +76,8 @@ module "backend" {
   api_gateway_name            = "${var.environment}_${var.api_gateway_name}"
   api_gateway_stage_name      = "${var.environment}_${var.api_gateway_stage_name}"
   lambda_permission_name      = "${var.environment}_${var.lambda_permission_name}"
+  cloudflare_zone_id          = var.cloudflare_zone_id
+  cloudflare_account_id       = var.cloudflare_account_id
 }
 
 module "frontend" {
