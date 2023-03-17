@@ -62,30 +62,33 @@ resource "random_pet" "lambda_bucket_name" {
 
 
 module "backend" {
-  source = "github.com/Rcomarceli/resume-modules//backend?ref=v1.0.4"
+  source = "github.com/Rcomarceli/resume-modules//backend?ref=v2.1.5"
 
+  environment                 = var.environment
   scope_permissions_arn       = var.scope_permissions_arn
   update_visitor_counter_path = var.update_visitor_counter_path
   lambda_bucket_name          = random_pet.lambda_bucket_name.id
   database_name               = "${var.environment}_${var.database_name}"
-  cloudflare_domain           = var.cloudflare_domain
   function_name               = "${var.environment}_${var.function_name}"
   lambda_iam_role_name        = "${var.environment}_${var.lambda_iam_role_name}"
   lambda_iam_policy_name      = "${var.environment}_${var.lambda_iam_policy_name}"
   api_gateway_name            = "${var.environment}_${var.api_gateway_name}"
   api_gateway_stage_name      = "${var.environment}_${var.api_gateway_stage_name}"
   lambda_permission_name      = "${var.environment}_${var.lambda_permission_name}"
+  cloudflare_domain           = var.cloudflare_domain
+  cloudflare_zone_id          = var.cloudflare_zone_id
+  cloudflare_account_id       = var.cloudflare_account_id
 }
 
 module "frontend" {
-  source = "github.com/Rcomarceli/resume-modules//frontend?ref=v1.0.4"
+  source = "github.com/Rcomarceli/resume-modules//frontend?ref=v2.1.5"
 
   api_url             = module.backend.api_url
   website_bucket_name = random_pet.website_bucket_name.id
 }
 
 module "dns" {
-  source = "github.com/Rcomarceli/resume-modules//dns?ref=v1.0.4"
+  source = "github.com/Rcomarceli/resume-modules//dns?ref=v2.1.5"
 
   # cloudflare variables here are defined in the terraform cloud org 
   # as environment variables
@@ -97,7 +100,7 @@ module "dns" {
 }
 
 module "www" {
-  source = "github.com/Rcomarceli/resume-modules//www?ref=v1.0.0"
+  source = "github.com/Rcomarceli/resume-modules//www?ref=v2.1.5"
 
   cloudflare_zone_id = var.cloudflare_zone_id
   cloudflare_domain  = var.cloudflare_domain

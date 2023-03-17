@@ -187,6 +187,10 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
+
+      - name: Download Website Dependencies and Build
+        working-directory: ./dev/.terraform/modules/frontend/frontend/src
+        run: npm ci && npm run build
       
       - name: Terraform Validate
         id: validate
