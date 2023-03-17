@@ -71,21 +71,9 @@ jobs:
         id: init
         run: terraform init
       
-      - name: Download Website Dependencies
+      - name: Download Website Dependencies and Build
         working-directory: ./dev/.terraform/modules/frontend/frontend/src
-        run: npm ci
-
-      - name: Create Env file 
-        working-directory: ./dev/.terraform/modules/frontend/frontend/src
-        run: echo "VITE_DOMAIN_NAME=${{ vars.DEV_DOMAIN }}" > .env
-
-      - name: Read Env File
-        working-directory: ./dev/.terraform/modules/frontend/frontend/src
-        run: cat .env
-
-      - name: Build Website
-        working-directory: ./dev/.terraform/modules/frontend/frontend/src
-        run: npm run build
+        run: npm ci && npm run build
       
       - name: Terraform Validate
         id: validate
