@@ -81,7 +81,7 @@ jobs:
 
       - name: Read Env File
         working-directory: ./dev/.terraform/modules/frontend/frontend/src
-        run: echo .env
+        run: cat .env
 
       - name: Build Website
         working-directory: ./dev/.terraform/modules/frontend/frontend/src
